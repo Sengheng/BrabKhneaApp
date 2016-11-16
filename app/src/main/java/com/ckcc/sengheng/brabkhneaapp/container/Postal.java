@@ -3,17 +3,17 @@ package com.ckcc.sengheng.brabkhneaapp.container;
 /**
  * Created by HP on 04-Nov-16.
  */
-public class Album {
+public class Postal {
     private String provinceKh;
     private String ProvinceEn;
     private int thumbnail;
     private int itemColor;
 
-    public Album() {
+    public Postal() {
     }
 
 
-    public Album(String provinceKh, String ProvinceEn, int thumbnail, int itemColor) {
+    public Postal(String provinceKh, String ProvinceEn, int thumbnail, int itemColor) {
         this.provinceKh = provinceKh;
         this.ProvinceEn = ProvinceEn;
         this.thumbnail = thumbnail;

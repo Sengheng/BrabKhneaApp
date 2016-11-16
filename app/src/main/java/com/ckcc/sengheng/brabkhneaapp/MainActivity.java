@@ -13,9 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Toast;
 
-import com.ckcc.sengheng.brabkhneaapp.adapter.AlbumsAdapter;
-import com.ckcc.sengheng.brabkhneaapp.container.Album;
+import com.ckcc.sengheng.brabkhneaapp.adapter.PostalAdapterListener;
+import com.ckcc.sengheng.brabkhneaapp.adapter.PostalsAdapter;
+import com.ckcc.sengheng.brabkhneaapp.container.Postal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +25,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private AlbumsAdapter adapter;
-    private List<Album> albumList;
+    private PostalsAdapter adapter;
+    private List<Postal> postalList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,19 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        albumList = new ArrayList<>();
-        adapter = new AlbumsAdapter(this, albumList);
+        postalList = new ArrayList<>();
+        adapter = new PostalsAdapter(this, postalList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        adapter.setPostalsAdapterListener(new PostalAdapterListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getApplicationContext(),"Position: "+position,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(4, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
@@ -132,12 +141,49 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        Postal a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
 
-        Album a = new Album(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
-        albumList.add(a);
+        a = new Postal(ProvincesKh[1],ProvincesEn[1], covers[1], colors[1]);
+        postalList.add(a);
 
-        a = new Album(ProvincesKh[1],ProvincesEn[1], covers[1], colors[1]);
-        albumList.add(a);
+        a = new Postal(ProvincesKh[1],ProvincesEn[1], covers[1], colors[1]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[1],ProvincesEn[1], covers[1], colors[1]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[1],ProvincesEn[1], covers[1], colors[1]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[1],ProvincesEn[1], covers[1], colors[1]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[1],ProvincesEn[1], covers[1], colors[1]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
+
+
+        a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
+
+        a = new Postal(ProvincesKh[0],ProvincesEn[0], covers[0], colors[0]);
+        postalList.add(a);
+
 
 
 

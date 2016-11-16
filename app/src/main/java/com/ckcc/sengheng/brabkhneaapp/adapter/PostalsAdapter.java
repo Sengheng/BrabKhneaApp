@@ -18,14 +18,21 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.ckcc.sengheng.brabkhneaapp.R;
-import com.ckcc.sengheng.brabkhneaapp.container.Album;
+import com.ckcc.sengheng.brabkhneaapp.container.Postal;
 
 import java.util.List;
 
-public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHolder> {
+public class PostalsAdapter extends RecyclerView.Adapter<PostalsAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Album> albumList;
+    private List<Postal> postalList;
+
+    private PostalAdapterListener postalAdapterListener;
+
+    public void setPostalsAdapterListener(PostalAdapterListener postalAdapterListener){
+
+        this.postalAdapterListener=postalAdapterListener;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView provinceKh, provinceEn;
@@ -36,35 +43,42 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             provinceKh = (TextView) view.findViewById(R.id.id_label_kh);
             provinceEn = (TextView) view.findViewById(R.id.id_label_en);
             thumbnail = (ImageView)view.findViewById(R.id.thumbnail);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    postalAdapterListener.onItemClick(getAdapterPosition());
+                }
+            });
             //overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
 
 
-    public AlbumsAdapter(Context mContext, List<Album> albumList) {
+    public PostalsAdapter(Context mContext, List<Postal> postalList) {
         this.mContext = mContext;
-        this.albumList = albumList;
+        this.postalList = postalList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.album_card, parent, false);
+                .inflate(R.layout.postal_card, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Album album = albumList.get(position);
-        holder.provinceKh.setText(album.getProvinceKh());
-        holder.provinceEn.setText(album.getProvinceEn());
+        Postal postal = postalList.get(position);
+        holder.provinceKh.setText(postal.getProvinceKh());
+        holder.provinceEn.setText(postal.getProvinceEn());
 
-        // loading album cover using Glide library
-        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
-        //holder.thumbnail.setBackgroundColor(album.getItemColor());
-        //holder.itemView.setBackgroundColor(album.getItemColor());
-        //holder.thumbnail.setText(album.getThumbnail());
+        // loading postal cover using Glide library
+        Glide.with(mContext).load(postal.getThumbnail()).into(holder.thumbnail);
+        //holder.thumbnail.setBackgroundColor(postal.getItemColor());
+        //holder.itemView.setBackgroundColor(postal.getItemColor());
+        //holder.thumbnail.setText(postal.getThumbnail());
 
        /* holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +125,6 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return albumList.size();
+        return postalList.size();
     }
 }
